@@ -29,8 +29,14 @@ def create_app():
     # db henüz init edilmeden import çalışır ve hata verir.
     from app.models import User, OnlineUser  # noqa: F401
 
-    # ⭐ Blueprint'ler burada register edilecek.
-    # Her route dosyasını yazdıkça buraya ekleyeceğiz.
-    # Şimdilik boş bırakıyoruz.
+    # ⭐ Blueprint'leri register et.
+    # Her Blueprint kendi URL grubuyla uygulamaya tanıtılır.
+    from app.routes.users import users_bp
+    from app.routes.auth import auth_bp
+    from app.routes.online import online_bp
+
+    app.register_blueprint(users_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(online_bp)
 
     return app
