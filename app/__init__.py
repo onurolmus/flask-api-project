@@ -24,6 +24,11 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
+    # Modelleri import et — Flask-Migrate tabloları bu sayede keşfeder.
+    # Bu import create_app() içinde olmalı, dışarıda olursa
+    # db henüz init edilmeden import çalışır ve hata verir.
+    from app.models import User, OnlineUser  # noqa: F401
+
     # ⭐ Blueprint'ler burada register edilecek.
     # Her route dosyasını yazdıkça buraya ekleyeceğiz.
     # Şimdilik boş bırakıyoruz.
