@@ -2,10 +2,7 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# uWSGI C ile yazılmış bir uygulama sunucusu, pip install sırasında derleniyor.
-# build-essential = gcc + g++ + make + tüm standart C header dosyaları (stdio.h vs.)
-# Debian slim'de bunlar yok, biz ekliyoruz.
-# Kurulumdan sonra apt cache temizleniyor → image boyutu küçülüyor.
+# build-essential is required to compile uWSGI from source
 RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential && \
     rm -rf /var/lib/apt/lists/*
